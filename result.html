@@ -12,6 +12,7 @@
             margin: 0;
             padding: 30px 20px;
             display: flex;
+            flex-direction: column; /* 🌟 모바일 쏠림 방지를 위해 정렬 축 수정 */
             justify-content: center;
             align-items: center;
             min-height: 100vh;
@@ -78,13 +79,14 @@
         .badge-item { display: flex; align-items: center; gap: 5px; color: #ffffff; }
         .badge-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
 
-        /* 🌟 다른 아이디 조회하기 버튼 세트 - 완벽한 중앙 배치 마크업 */
+        /* 🌟 하단 버튼 정렬 구역 (PC/모바일 공용 100% 중앙 정렬) */
         .actions-zone { 
             margin-top: 35px; 
             display: flex; 
             justify-content: center; 
             align-items: center; 
             width: 100%; 
+            box-sizing: border-box;
         }
         .back-btn { 
             display: inline-flex; 
@@ -99,6 +101,7 @@
             border-radius: 8px; 
             border: 1px solid #30363d; 
             transition: background 0.2s, border-color 0.2s; 
+            white-space: nowrap; /* 모바일에서 글자 줄바꿈 방지 */
         }
         .back-btn:hover { 
             background-color: #30363d; 
@@ -207,7 +210,9 @@
                 <p style="font-size: 12px; color: #8b949e; font-weight: 600; text-align: left; margin: 0 0 10px 0;">📋 분석 대상 포스팅 목록 (실시간 날짜)</p>
                 <ul id="postContainer" class="post-list"></ul>
             </div>
-        </div> <div class="actions-zone">
+        </div>
+
+        <div class="actions-zone">
             <a href="index.html" id="backBtn" class="back-btn">← 다른 아이디 조회하기</a>
         </div>
     </div>
