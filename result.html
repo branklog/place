@@ -78,34 +78,31 @@
         .badge-item { display: flex; align-items: center; gap: 5px; color: #ffffff; }
         .badge-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
 
-    /* 🌟 다른 아이디 조회하기 (주석 마감 완전 복구) */
+        /* 🌟 다른 아이디 조회하기 버튼 세트 - 완벽한 중앙 배치 마크업 */
         .actions-zone { 
-            margin-top: 35px !important; 
-            display: flex !important; 
-            justify-content: center !important; 
-            align-items: center !important; 
-            width: 100% !important; 
+            margin-top: 35px; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            width: 100%; 
         }
         .back-btn { 
-            display: inline-flex !important; 
-            justify-content: center !important; 
-            align-items: center !important; 
-            padding: 12px 32px !important; 
-            background: #161b22 !important; 
-            background-color: #161b22 !important; /* 카드 배경색 강제 적용 */
-            color: #ffffff !important;            /* 글자색 흰색 강제 적용 */
-            text-decoration: none !important; 
-            font-size: 14px !important; 
-            font-weight: 600 !important; 
-            border-radius: 8px !important; 
-            border: 1px solid #30363d !important; 
-            transition: background 0.2s, border-color 0.2s !important; 
+            display: inline-flex; 
+            justify-content: center; 
+            align-items: center; 
+            padding: 12px 32px; 
+            background-color: #161b22; 
+            color: #ffffff; 
+            text-decoration: none; 
+            font-size: 14px; 
+            font-weight: 600; 
+            border-radius: 8px; 
+            border: 1px solid #30363d; 
+            transition: background 0.2s, border-color 0.2s; 
         }
         .back-btn:hover { 
-            background: #30363d !important; 
-            background-color: #30363d !important; 
-            border-color: #8b949e !important; 
-            color: #ffffff !important;
+            background-color: #30363d; 
+            border-color: #8b949e; 
         }
         
         .loader-wrapper { text-align: center; padding: 60px 0; }
@@ -210,9 +207,7 @@
                 <p style="font-size: 12px; color: #8b949e; font-weight: 600; text-align: left; margin: 0 0 10px 0;">📋 분석 대상 포스팅 목록 (실시간 날짜)</p>
                 <ul id="postContainer" class="post-list"></ul>
             </div>
-        </div>
-
-        <div class="actions-zone">
+        </div> <div class="actions-zone">
             <a href="index.html" id="backBtn" class="back-btn">← 다른 아이디 조회하기</a>
         </div>
     </div>
@@ -414,7 +409,6 @@
                     categoryReason = "다양한 일상 트렌드와 정보를 골고루 기록하며 대중적인 소통을 전개하는 라이프스타일 중심의 채널입니다.";
                 }
 
-                // 🌟 순정 코드 변수 그대로 활용하여 오른쪽 카드의 텍스트 컴포넌트들에 데이터 주입
                 document.getElementById('tendencyValue').innerText = `${matchedCategory} 전문형 블로그`;
                 document.getElementById('descNoticeBox').innerHTML = categoryReason;
 
