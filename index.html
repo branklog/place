@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>B랭크로그 | 마케팅 지수 조회</title>
+    <title>블로그 지수 분석 B랭크로그 | BrankLog</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -22,57 +21,100 @@
             border-radius: 14px;
             padding: 40px;
             width: 100%;
-            max-width: 450px;
+            max-width: 480px;
             text-align: center;
             box-shadow: 0 8px 24px rgba(0,0,0,0.3);
         }
-        h1 { font-size: 24px; margin-bottom: 25px; font-weight: 800; }
-        h1 span { color: #388bfd; }
+        h1 { font-size: 26px; margin-bottom: 10px; font-weight: 800; letter-spacing: -0.5px; }
+        h1 span { color: #03cf5d; }
+        .subtitle { font-size: 14px; color: #8b949e; margin-bottom: 30px; }
+        
+        /* 탭 메뉴 스타일 */
+        .tab-menu { display: flex; background: #0d1117; padding: 4px; border-radius: 8px; margin-bottom: 25px; border: 1px solid #21262d; }
+        .tab-btn { flex: 1; padding: 10px; background: none; border: none; color: #8b949e; font-size: 14px; font-weight: 600; cursor: pointer; border-radius: 6px; transition: all 0.2s; }
+        .tab-btn.active.blog { background: #03cf5d; color: #ffffff; }
+        .tab-btn.active.place { background: #388bfd; color: #ffffff; }
+
         .input-group { display: flex; flex-direction: column; gap: 15px; }
         input {
             background-color: #0d1117;
             border: 1px solid #30363d;
             border-radius: 8px;
-            padding: 14px;
+            padding: 15px;
             color: #ffffff;
             font-size: 16px;
             outline: none;
+            box-sizing: border-box;
+            width: 100%;
         }
-        input:focus { border-color: #388bfd; }
-        button {
-            background-color: #388bfd;
+        input:focus { border-color: #03cf5d; }
+        input.place-focus:focus { border-color: #388bfd; }
+
+        button.search-submit {
             color: #ffffff;
             border: none;
             border-radius: 8px;
-            padding: 14px;
+            padding: 15px;
             font-size: 16px;
             font-weight: 700;
             cursor: pointer;
             transition: background 0.2s;
         }
-        button:hover { background-color: #1f6feb; }
+        button.search-submit.blog { background-color: #03cf5d; }
+        button.search-submit.blog:hover { background-color: #02a94c; }
+        button.search-submit.place { background-color: #388bfd; }
+        button.search-submit.place:hover { background-color: #1f6feb; }
     </style>
 </head>
 <body>
 
     <div class="search-container">
-        <h1>Brank<span>Log(PLACE).</span></h1>
+        <h1>Brank<span id="brandDot">Log.</span></h1>
+        <p class="subtitle">네이버 빅데이터 통합 지수 조회 시스템</p>
+        
+        <div class="tab-menu">
+            <button class="tab-btn active blog" onclick="switchTab('blog')">네이버 블로그</button>
+            <button class="tab-btn place" onclick="switchTab('place')">스마트플레이스</button>
+        </div>
+
         <div class="input-group">
-            <input type="text" id="placeInput" placeholder="네이버 플레이스 상호명을 입력하세요" onkeypress="if(event.keyCode==13) handleSearch()">
-            <button onclick="handleSearch()">플레이스 마케팅 지수 조회</button>
+            <input type="text" id="mainInput" placeholder="네이버 블로그 ID를 입력하세요" onkeypress="if(event.keyCode==13) handleSearch()">
+            <button id="submitBtn" class="search-submit blog" onclick="handleSearch()">블로그 지수 분석하기</button>
         </div>
     </div>
 
     <script>
-        function handleSearch() {
-            const inputValue = document.getElementById('placeInput').value.trim();
-            if (!inputValue) {
-                alert('상호명을 입력해 주세요.');
-                return;
+        let currentMode = 'blog';
+
+        function switchTab(mode) {
+            currentMode = mode;
+            const input = document.getElementById('mainInput');
+            const btn = document.getElementById('submitBtn');
+            const dot = document.getElementById('brandDot');
+            const blogBtn = document.querySelector('.tab-btn.blog');
+            const placeBtn = document.querySelector('.tab-btn.place');
+
+            if (mode === 'blog') {
+                blogBtn.classList.add('active');
+                placeBtn.classList.remove('active');
+                input.placeholder = "네이버 블로그 ID를 입력하세요";
+                input.classList.remove('place-focus');
+                btn.innerText = "블로그 지수 분석하기";
+                btn.className = "search-submit blog";
+                dot.style.color = "#03cf5d";
+            } else {
+                placeBtn.classList.add('active');
+                blogBtn.classList.remove('active');
+                input.placeholder = "네이버 플레이스 상호명을 입력하세요";
+                input.classList.add('place-focus');
+                btn.innerText = "플레이스 마케팅 지수 조회";
+                btn.className = "search-submit place";
+                dot.style.color = "#388bfd";
             }
-            // 🚀 핵심: 플레이스 전용 파라미터(placeQuery)를 붙여 결과 페이지로 전송
-            window.location.href = `result.html?placeQuery=${encodeURIComponent(inputValue)}`;
+            input.value = "";
+            input.focus();
         }
-    </script>
-</body>
-</html>
+
+        function handleSearch() {
+            const inputValue = document.getElementById('mainInput').value.trim();
+            if (!inputValue)
