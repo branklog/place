@@ -12,7 +12,7 @@
             margin: 0;
             padding: 30px 20px;
             display: flex;
-            flex-direction: column; /* 🌟 모바일 쏠림 방지를 위해 정렬 축 수정 */
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
@@ -58,7 +58,6 @@
         .formula-text { font-size: 11px; color: #6e7681; line-height: 1.5; margin: 0; word-break: break-all; }
 
         .post-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
-        /* 🌟 제목 영역과 날짜 영역을 양끝으로 칼정렬하는 기본 스타일 */
         .post-item { display: flex; justify-content: space-between; align-items: center; background: #0d1117; padding: 14px 16px; border-radius: 10px; border: 1px solid #21262d; box-sizing: border-box; }
         .post-left-box { display: flex; align-items: center; overflow: hidden; max-width: 80%; }
         .post-badge { background: #21262d; color: #03cf5d; font-size: 12px; font-weight: 700; width: 24px; height: 24px; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
@@ -67,7 +66,6 @@
         .post-content a:hover { color: #03cf5d; text-decoration: underline; }
         .post-date-label { color: #8b949e; font-size: 12px; font-family: monospace; flex-shrink: 0; margin-left: 10px; }
 
-        /* 🌟 채널 성향 결과 리포트 레이아웃 전용 디자인 가이드 CSS */
         .tendency-box { background: #0d1117; border: 1px solid #21262d; border-radius: 10px; padding: 16px; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
         .tendency-icon { font-size: 20px; }
         .tendency-details { text-align: left; }
@@ -79,7 +77,6 @@
         .badge-item { display: flex; align-items: center; gap: 5px; color: #ffffff; }
         .badge-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
 
-        /* 🌟 하단 버튼 정렬 구역 (PC/모바일 공용 100% 중앙 정렬) */
         .actions-zone { 
             margin-top: 35px; 
             display: flex; 
@@ -101,7 +98,7 @@
             border-radius: 8px; 
             border: 1px solid #30363d; 
             transition: background 0.2s, border-color 0.2s; 
-            white-space: nowrap; /* 모바일에서 글자 줄바꿈 방지 */
+            white-space: nowrap;
         }
         .back-btn:hover { 
             background-color: #30363d; 
@@ -156,289 +153,4 @@
                 <p class="card-title">📈 지수 및 노출 분석</p>
                 <div class="jisu-display">
                     <p class="gauge-subtext">종합 분석 지수 판정</p>
-                    <p id="blogGrade" class="main-grade-text">분석 일반</p>
-                     
-                    <div class="circle-chart-wrapper">
-                        <div id="circleChart" class="circle-chart">
-                            <div class="circle-chart-inner">
-                                <span id="circleScore" class="circle-score">0점</span>
-                                <span class="circle-label">노출 가중치</span>
-                            </div>
-                        </div>
-                    </div>
-                     
-                    <div class="analysis-status-badge">
-                        노출 가중 상태: <span id="statusText" style="color: #03cf5d; font-weight:700;">정상</span>
-                    </div>
-                </div>
-
-                <div class="formula-notice-box">
-                    <p class="formula-title">📋 지수 가중치 산출 근거 안내</p>
-                    <p class="formula-text" id="noticeBody">
-                        본 지표는 포털 공식 최고 지수와는 무관한 임의 계산값입니다. 최근 30일 이내 당월 포스팅 업로드 빈도(Volume), 발행 주기 성실도(Frequency), 제목 및 콘텐츠 본문 텍스트 밀도 가중치를 실시간 다차원 연산하여 도출한 대략적인 활성 점수이오니 블로그 운영 참고용으로만 활용해 주시기 바랍니다.
-                    </p>
-                </div>
-            </div>
-
-            <div class="card">
-                <p class="card-title" id="listTitle">🔥 채널 성향 결과 리포트</p>
-                
-                <div class="tendency-box">
-                    <div class="tendency-icon" id="tendencyIcon">🏆</div>
-                    <div class="tendency-details">
-                        <div class="tendency-label" id="tendencyLabel">실시간 채널 성향 판정</div>
-                        <div class="tendency-value" id="tendencyValue">전문형 블로그 분석 중...</div>
-                    </div>
-                </div>
-
-                <div class="desc-notice-box" id="descNoticeBox">
-                    최근 포스팅 데이터를 정밀 스캔하여 스토어 및 마케팅 타겟 키워드 밀도와 콘텐츠 전문성을 연산하고 있습니다.
-                </div>
-
-                <div class="badge-zone-wrapper">
-                    <span class="badge-title">분석 핵심 타겟 영역</span>
-                    <span class="badge-item">
-                        <span class="badge-dot" id="badgeDot1" style="background: #ff4a5d;"></span>
-                        <span id="badgeText1">실시간 데이터 연동</span>
-                    </span>
-                    <span class="badge-item">
-                        <span class="badge-dot" id="badgeDot2" style="background: #388bfd;"></span>
-                        <span id="badgeText2">가중치 매칭 완료</span>
-                    </span>
-                </div>
-
-                <p style="font-size: 12px; color: #8b949e; font-weight: 600; text-align: left; margin: 0 0 10px 0;">📋 분석 대상 포스팅 목록 (실시간 날짜)</p>
-                <ul id="postContainer" class="post-list"></ul>
-            </div>
-        </div>
-
-        <div class="actions-zone">
-            <a href="index.html" id="backBtn" class="back-btn">← 다른 아이디 조회하기</a>
-        </div>
-    </div>
-
-    <script>
-        const now = new Date();
-        const formattedDate = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0') + ' ' + String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
-        document.getElementById('currentTime').innerText = formattedDate;
-
-        const urlParams = new URLSearchParams(window.location.search);
-        const rawBlogId = urlParams.get('blogId');
-        const blogId = rawBlogId ? decodeURIComponent(rawBlogId) : null;
-
-        if (!blogId) {
-            document.getElementById('loader').innerHTML = "<span style='color:#ff6b6b; font-weight:bold;'>올바른 블로그 ID가 전달되지 않았습니다.</span>";
-        } else {
-            document.getElementById('displayId').innerText = blogId;
-            document.getElementById('headerId').innerText = blogId;
-            fetchBlogRealData(blogId);
-        }
-
-        async function fetchBlogRealData(id) {
-            const proxyUrl = "https://corsproxy.io/?";
-            const targetUrl = encodeURIComponent(`https://rss.blog.naver.com/${id}.xml`);
-
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 4000); 
-
-            try {
-                const response = await fetch(proxyUrl + targetUrl, { signal: controller.signal });
-                clearTimeout(timeoutId); 
-                 
-                if (!response.ok) throw new Error("네이버 응답 지연");
-                 
-                const textData = await response.text();
-                const parser = new DOMParser();
-                const xmlDoc = parser.parseFromString(textData, "text/xml");
-                 
-                const channelDoc = xmlDoc.getElementsByTagName("channel")[0];
-                let realGreeting = "네이버 블로그";
-                if (channelDoc) {
-                    const titleNode = channelDoc.getElementsByTagName("title")[0];
-                    if (titleNode && titleNode.textContent.trim().length > 0) {
-                        realGreeting = titleNode.textContent.replace(" : 네이버 블로그", "").trim();
-                        if (realGreeting.length > 22) realGreeting = realGreeting.substring(0, 20) + "...";
-                    }
-                }
-
-                const items = xmlDoc.getElementsByTagName("item");
-                const totalPosts = items.length;
-
-                if (totalPosts === 0) throw new Error("데이터 공백");
-
-                let postHtml = "";
-                let totalTitleLength = 0;
-                let activeMonthPosts = 0; 
-                let dates = [];
-                const thirtyDaysAgo = new Date();
-                thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-
-                for (let i = 0; i < Math.min(totalPosts, 5); i++) {
-                    const title = items[i].getElementsByTagName("title")[0].textContent;
-                    const link = items[i].getElementsByTagName("link")[0].textContent;
-                    const pubDateStr = items[i].getElementsByTagName("pubDate")[0].textContent;
-                    
-                    const pDate = new Date(pubDateStr);
-                    totalTitleLength += title.length;
-                    dates.push(pDate);
-
-                    if (pDate >= thirtyDaysAgo) {
-                        activeMonthPosts++;
-                    }
-
-                    const yy = String(pDate.getFullYear()).slice(-2);
-                    const mm = String(pDate.getMonth() + 1).padStart(2, '0');
-                    const dd = String(pDate.getDate()).padStart(2, '0');
-                    const formattedPostDate = `${yy}.${mm}.${dd}`;
-
-                    postHtml += `
-                        <li class="post-item">
-                            <div class="post-left-box">
-                                <div class="post-badge">${i+1}</div>
-                                <div class="post-content"><a href="${link}" target="_blank">${title}</a></div>
-                            </div>
-                            <span class="post-date-label">${formattedPostDate}</span>
-                        </li>`;
-                }
-
-                document.getElementById('collectedCount').innerText = `${activeMonthPosts}개`;
-                document.getElementById('blogGreeting').innerText = realGreeting; 
-
-                let score = 0;
-
-                if (activeMonthPosts >= 6) score += 40;     
-                else if (activeMonthPosts >= 3) score += 30; 
-                else if (activeMonthPosts >= 1) score += 15; 
-                else score += 5;
-
-                const avgTitleLength = totalTitleLength / Math.min(totalPosts, 5);
-                if (avgTitleLength >= 30) score += 30; 
-                else if (avgTitleLength >= 18) score += 20;
-                else score += 10;
-
-                if (dates.length >= 2 && activeMonthPosts >= 1) {
-                    const timeDiff = Math.abs(dates[0] - dates[1]) / (1000 * 60 * 60 * 24);
-                    if (timeDiff <= 5) score += 30; 
-                    else if (timeDiff <= 10) score += 20;
-                    else score += 10;
-                } else {
-                    score += 5; 
-                }
-
-                let grade = "일반 블로그";
-                if (score >= 80) grade = "최적화 등급";     
-                else if (score >= 55) grade = "준최 최상위"; 
-                else if (score >= 35) grade = "준최 등급";
-                else grade = "분석 일반";
-
-                document.getElementById('circleScore').innerText = `${score}점`;
-                document.getElementById('circleChart').style.background = `conic-gradient(#03cf5d ${score}%, #21262d ${score}% 100%)`;
-                document.getElementById('postContainer').innerHTML = postHtml;
-
-                const specializedCategories = [
-                    { name: "미술·디자인", keywords: ["디자인", "디자이너", "미술", "로고", "브랜딩", "패키지", "라벨", "시각디자인", "포스터", "일러스트", "굿즈", "전시", "그림", "리플렛", "리플릿", "배너", "간판", "시안", "제작", "목업", "카탈로그", "CI", "BI", "폰트", "누끼", "캘리그라피", "리플렛"] },
-                    { name: "문학·책", keywords: ["문학", "도서", "책", "독서", "소설", "시집", "서평", "독후감", "베스트셀러", "작가", "에세이", "출판"] },
-                    { name: "영화", keywords: ["영화", "무비", "시네마", "개봉작", "넷플릭스", "리뷰", "평점", "영화관", "CGV", "메가박스", "왓챠", "디즈니플러스"] },
-                    { name: "공연·전시", keywords: ["공연", "전시회", "뮤지컬", "연극", "콘서트", "페스티벌", "티켓", "예매", "독주회", "오케스트라", "내한"] },
-                    { name: "음악", keywords: ["음악", "노래", "뮤직", "앨범", "음원", "작곡", "보컬", "재즈", "클래식", "팝송", "밴드", "악기", "피아노", "기타"] },
-                    { name: "드라마", keywords: ["드라마", "정주행", "시청률", "드라마방영", "배우", "명대사", "예능", "방송", "티빙", "웨이브", "본방사수"] },
-                    { name: "스타·연예인", keywords: ["아이돌", "연예인", "스타", "멤버", "컴백", "덕질", "팬미팅", "콘서트", "직캠", "소속사", "팬클럽"] },
-                    { name: "만화·애니", keywords: ["만화", "애니", "웹툰", "만화책", "코믹스", "피규어", "덕후", "코스프레", "작화", "성우", "굿즈샵"] },
-                    { name: "패션·뷰티", keywords: ["화장품", "립스틱", "데일리룩", "코디", "메이크업", "향수", "패션", "스킨", "로션", "앰플", "쿠션", "의류", "뷰티템", "네일", "헤어", "스타일링", "오오티디", "ootd", "선크림", "틴트"] },
-                    { name: "인테리어·DIY", keywords: ["가구", "소품", "인테리어", "집꾸미기", "청소", "주방", "매트리스", "침구", "커튼", "조명", "소파", "DIY", "리모델링", "소품샵", "타일", "도배"] },
-                    { name: "요리·레시피", keywords: ["레시피", "요리", "밀키트", "디저트", "반찬", "식단", "베이킹", "집밥", "양념", "쿠킹", "베이커리", "조리법", "찌개", "국", "에어프라이어"] },
-                    { name: "육아·결혼", keywords: ["어린이집", "유모차", "육아템", "아동", "유아", "기저귀", "분유", "결혼식", "웨딩", "예신", "혼수", "임신", "출산", "조리원", "스튜디오"] },
-                    { name: "원예·재배", keywords: ["식물", "화분", "가드닝", "원예", "재배", "꽃 키우기", "다육이", "몬스테라", "페페로미아", "제라늄", "텃밭", "베란다", "분갈이", "삽목"] },
-                    { name: "반려동물", keywords: ["강아지", "고양이", "반려견", "반려묘", "댕댕이", "냥이", "사료", "애견", "집사", "동물병원", "노령견", "개껌", "캣타워"] },
-                    { name: "상품리뷰", keywords: ["리뷰", "후기", "내돈내산", "추천템", "개봉기", "언박싱", "구매후기", "사용기", "체험단", "솔직후기", "내돈내산리뷰"] },
-                    { name: "리빙·노하우", keywords: ["살림", "청소", "정리", "수납", "노하우", "생활정보", "꿀팁", "세탁", "자취", "생활용품", "얼룩제거"] },
-                    { name: "맛집", keywords: ["맛집", "카페", "추천", "식당", "고기집", "술집", "핫플", "존맛", "먹스타그램", "푸드", "점심메뉴", "회식", "데이트코스", "로컬맛집"] },
-                    { name: "국내여행", keywords: ["제주도", "국내여행", "부산여행", "강원도", "풀빌라", "숙소", "글램핑", "펜션", "호텔", "당일치기", "명소", "가볼만한곳", "여수", "경주", "여행코스"] },
-                    { name: "해외여행", keywords: ["해외여행", "유럽여행", "일본여행", "동남아", "항공권", "출국", "비자", "환전", "캐리어", "현지맛집", "자유여행", "방콕", "다낭", "도쿄"] },
-                    { name: "자동차", keywords: ["자동차", "차량", "시승기", "출고", "수입차", "국산차", "전기차", "중고차", "튜닝", "정비", "타이어", "엔진오일", "세차", "썬팅", "광택", "블랙박스", "네비", "휠", "도색", "랩핑", "덴트", "유리막", "디테일링", "브레이크", "서스펜션", "배기", "카니발", "쏘렌토", "아반떼", "그랜저"] },
-                    { name: "스포츠", keywords: ["축구", "야구", "골프", "농구", "배구", "스포츠", "경기", "유니фом", "직관", "리그", "등산", "캠핑", "헬스", "PT", "러닝", "테니스"] },
-                    { name: "사진", keywords: ["사진", "카메라", "렌즈", "촬영", "스냅", "출사", "포토", "보정", "필름", "삼각대", "출사지", "DSLR", "미러리스"] },
-                    { name: "게임", keywords: ["게임", "모바일게임", "공략", "이벤트", "스팀", "롤", "배그", "플스", "닌텐도", "RPG", "사전예약", "모바일게임추천"] },
-                    { name: "일상·생각", keywords: ["일상", "일기", "생각", "주말", "기록", "오늘", "하루", "소통", "잡담", "소소한", "이웃", "일주일", "일상블로그", "근황"] },
-                    { name: "좋은글·이미지", keywords: ["좋은글", "명언", "글귀", "글귀이미지", "감성글", "인생명언", "위로글", "바탕화면", "일러스트배경", "감성사진"] },
-                    { name: "IT·컴퓨터", keywords: ["아이폰", "갤럭시", "윈도우", "맥북", "전자기기", "테크", "애플", "삼성", "폰", "워치", "패드", "컴퓨터", "프로그램", "앱", "소프트웨어", "IT", "AI", "챗GPT", "얼리어답터"] },
-                    { name: "사회·정치", keywords: ["정치", "사회", "뉴스", "이슈", "선거", "정책", "정부", "국회", "법안", "사건", "사고", "국제사회", "시사"] },
-                    { name: "건강·의학", keywords: ["병원", "의원", "한의원", "치과", "피부과", "성형외과", "내과", "외과", "의사", "치료", "수술", "시술", "건강", "증상", "질환", "약국", "통증", "영양제", "다이어트", "스트레칭"] },
-                    { name: "비즈니스·경제", keywords: ["주식", "투자", "부동산", "재테크", "창업", "대출", "지원금", "금융", "코인", "비트코인", "공모주", "세금", "연금", "보험", "청약", "경매", "소상공인"] },
-                    { name: "어학·외국어", keywords: ["영어", "회화", "토익", "토플", "일본어", "중국어", "외국어", "독학", "문법", "단어암기", "오픽", "토스", "전화영어"] },
-                    { name: "교육·학문", keywords: ["학교", "학원", "공부", "시험", "자격증", "수능", "교육", "학문", "논문", "교재", "수업", "인강", "독서실"] },
-                    { name: "역사", keywords: ["역사", "세계사", "한국사", "유적지", "문화재", "박물관", "조선", "역사학", "근현대사", "고고학"] },
-                    { name: "시사·인문·학문", keywords: ["철학", "인문학", "심리학", "독서모임", "교양", "시사", "논평", "칼럼", "고전", "생각거리"] }
-                ];
-
-                let combinedTitles = "";
-                for (let i = 0; i < Math.min(totalPosts, 5); i++) {
-                    combinedTitles += items[i].getElementsByTagName("title")[0].textContent;
-                }
-
-                let matchedCategory = "일반/일상";
-                let maxMatchScore = 0; 
-
-                specializedCategories.forEach(category => {
-                    let matchScore = 0;
-                    category.keywords.forEach(keyword => {
-                        let pos = combinedTitles.indexOf(keyword);
-                        while (pos !== -1) {
-                            matchScore += 10; 
-                            pos = combinedTitles.indexOf(keyword, pos + 1);
-                        }
-                    });
-                    
-                    if (matchScore > maxMatchScore) {
-                        maxMatchScore = matchScore;
-                        matchedCategory = category.name;
-                    }
-                });
-
-                const tagElement = document.getElementById('blogGreeting');
-                if (tagElement) {
-                    tagElement.innerText = `전문분야: ${matchedCategory}`;
-                    tagElement.style.background = "rgba(56, 139, 253, 0.1)"; 
-                    tagElement.style.borderColor = "rgba(56, 139, 253, 0.3)";
-                    tagElement.style.color = "#388bfd";
-                }
-
-                document.getElementById('blogGrade').innerText = grade;
-                document.getElementById('statusText').innerText = "정상";
-                document.getElementById('statusText').style.color = "#03cf5d";
-                 
-                document.getElementById('noticeBody').innerText = "본 지표는 포털 공식 최고 지수와는 무관한 임의 계산값입니다. 최근 30일 이내 당월 포스팅 업로드 빈도(Volume), 발행 주기 성실도(Frequency), 제목 및 콘텐츠 본문 텍스트 밀도 가중치를 실시간 다차원 연산하여 도출한 대략적인 활성 점수이오니 블로그 운영 참고용으로만 활용해 주시기 바랍니다. (※ 프록시 서버 및 포털 RSS 네트워크 상태에 따라 간혹 데이터 로딩이 누락되어 일시적인 판정 오차가 발생할 수 있습니다.)";
-
-                let categoryReason = `최근 포스팅 데이터 스캔 결과, [${matchedCategory}] 분야의 마케팅 타겟 키워드 밀도와 콘텐츠 전문성이 가장 높게 분석되었습니다.`;
-                if (matchedCategory === "일반/일상") {
-                    categoryReason = "다양한 일상 트렌드와 정보를 골고루 기록하며 대중적인 소통을 전개하는 라이프스타일 중심의 채널입니다.";
-                }
-
-                document.getElementById('tendencyValue').innerText = `${matchedCategory} 전문형 블로그`;
-                document.getElementById('descNoticeBox').innerHTML = categoryReason;
-
-                document.getElementById('loader').style.display = "none";
-                document.getElementById('dashboard').style.display = "block";
-
-            } catch (error) {
-                document.getElementById('collectedCount').innerText = "지연";
-                document.getElementById('blogGreeting').innerText = "네이버 블로그";
-                document.getElementById('circleScore').innerText = "- 점";
-                document.getElementById('circleChart').style.background = "#21262d";
-                document.getElementById('blogGrade').innerText = "연동 지연";
-                document.getElementById('statusText').innerText = "데이터 통로 정체";
-                document.getElementById('statusText').style.color = "#8b949e";
-                document.getElementById('postContainer').innerHTML = `
-                    <li class="post-item" style="justify-content: center;">
-                        <div class="post-content" style="text-align: center;"><a href="https://blog.naver.com/${id}" target="_blank">⚠️ 실시간 파싱 지연 (여기를 눌러 블로그 홈 확인)</a></div>
-                    </li>`;
-                 
-                document.getElementById('noticeBody').innerText = "본 지표는 포털 공식 최고 지수와는 무관한 임의 계산값입니다. 최근 30일 이내 당월 포스팅 업로드 빈도(Volume), 발행 주기 성실도(Frequency), 제목 및 콘텐츠 본문 텍스트 밀도 가중치를 실시간 다차원 연산하여 도출한 대략적인 활성 점수이오니 블로그 운영 참고용으로만 활용해 주시기 바랍니다. (※ 프록시 서버 및 포털 RSS 네트워크 상태에 따라 간혹 데이터 로딩이 누락되어 일시적인 판정 오차가 발생할 수 있습니다.)";
-
-                document.getElementById('loader').style.display = "none";
-                document.getElementById('dashboard').style.display = "block";
-            }
-        }
-    </script>
-</body>
-</html>
+                    <p id="
