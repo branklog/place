@@ -392,25 +392,39 @@
                     }
                 });
 
-                // 🌟 [수정 핵심] 지수 스코어 및 등급에 맞춰 리포트 판정을 분기합니다.
+                // 🌟 [정합성 고도화] 점수가 낮아도 전문 정체성이 담겨있다면 전문 브랜드를 온전히 판정합니다.
                 let finalTendencyTitle = "";
                 let finalTendencyDesc = "";
 
-                if (score >= 55) {
-                    // 준최 최상위 ~ 최적화 블로그: 전문 분야 매칭 적용
-                    finalTendencyTitle = `${matchedCategory} 전문형 블로그`;
-                    finalTendencyDesc = matchedCategory === "일반/일상" 
-                        ? "다양한 일상 트렌드와 정보를 골고루 기록하며 대중적인 소통을 전개하는 라이프스타일 중심의 채널입니다."
-                        : `최근 포스팅 데이터 스캔 결과, [${matchedCategory}] 분야의 마케팅 타겟 키워드 밀도와 콘텐츠 전문성이 아주 우수하게 연산되었습니다.`;
+                if (score >= 80) {
+                    finalTendencyTitle = `${matchedCategory} 최적화 전문 블로그`;
+                    finalTendencyDesc = matchedCategory === "일반/일상"
+                        ? "다양한 일상 트렌드와 방대한 정보를 골고루 다루며 대중적 소통과 노출 가중치가 최고 수준인 라이프스타일 랜드마크 채널입니다."
+                        : `최근 발행된 포스팅 스캔 결과, [${matchedCategory}] 카테고리의 핵심 타겟 키워드 밀도와 콘텐츠 전문성이 공식 최고 지수급에 근접하게 연산되었습니다.`;
+                } else if (score >= 55) {
+                    finalTendencyTitle = `${matchedCategory} 준최적화 전문 블로그`;
+                    finalTendencyDesc = matchedCategory === "일반/일상"
+                        ? "일상 일기 기록과 유용한 정보 전달의 밸런스가 뛰어나며, 탄탄한 이웃 소통을 전개하는 준최상위급 라이프 채널입니다."
+                        : `최근 포스팅 데이터를 다차원 정밀 연산한 결과, [${matchedCategory}] 카테고리의 테마 연관성이 높고 정보 검색 노출 가중치가 활성화된 준최 상위 전문 채널입니다.`;
                 } else if (score >= 35) {
-                    // 준최 등급 (성장기): 키워드가 있어도 아직 일반형/성장형으로 출력
-                    finalTendencyTitle = "성장형 일반 블로그";
-                    finalTendencyDesc = `특정 카테고리([${matchedCategory}])의 콘텐츠 발행이 관측되나, 종합적인 지수 가중치가 성장 단계에 머물러 있어 일상 중심의 확장형 채널로 분류됩니다.`;
+                    // 35 ~ 54점 성장기
+                    if (matchedCategory === "일반/일상") {
+                        finalTendencyTitle = "성장형 준최적화 블로그";
+                        finalTendencyDesc = "특정 카테고리에 치우치지 않고 일상, 트렌드, 리뷰 등 유연한 스펙트럼의 콘텐츠를 발행하며 완만하게 지수를 축적하고 있는 성장형 채널입니다.";
+                    } else {
+                        finalTendencyTitle = `${matchedCategory} 성장형 전문 블로그`;
+                        finalTendencyDesc = `최근 포스팅 내에 [${matchedCategory}] 관련 뚜렷한 전문 정체성이 관측되나, 발행 패턴 및 본문 가중치 최적화가 아직 성장 단계에 머물러 있는 과도기형 채널입니다.`;
+                    }
                 } else {
-                    // 분석 일반 / 낮은 점수: 일상형 일기장 블로그로 완전 제한
-                    finalTendencyTitle = "라이프스타일 일상 블로그";
-                    finalTendencyDesc = "발행 빈도 및 특정 상업/마케팅 타겟 키워드 밀도가 낮아 개인 소통 및 가벼운 일상 기록 용도로 활성화된 채널입니다.";
-                    matchedCategory = "일반/일상"; // 정보 카드 라벨도 리셋
+                    // 🌟 20점대 이하 하위 구간 처리 (점수와 무관하게 제목 정체성 추적 보완)
+                    if (matchedCategory === "일반/일상") {
+                        finalTendencyTitle = "라이프스타일 일반 일상 블로그";
+                        finalTendencyDesc = "발행 주기 성실도 및 마케팅 타겟 키워드 밀도가 다소 누락되어, 상업적 활용보다는 개인 소소한 일상 기록과 청정 소통 용도로 최적화된 소셜 채널입니다.";
+                    } else {
+                        // 점수가 낮아도 특정 전문 주제가 검출된 핵심 반전 분기 구역
+                        finalTendencyTitle = `${matchedCategory} 휴면/초기형 전문 블로그`;
+                        finalTendencyDesc = `포스팅 분석 결과 [${matchedCategory}] 영역에 대한 명확한 전문 정체성을 포함하고 있습니다. 다만, 최근 발행 공백기(휴면) 또는 누적 볼륨 부족으로 인해 일시적으로 종합 지수 가중치가 하락해 있는 상태입니다.`;
+                    }
                 }
 
                 const tagElement = document.getElementById('blogGreeting');
@@ -427,7 +441,6 @@
                  
                 document.getElementById('noticeBody').innerText = "본 지표는 포털 공식 최고 지수와는 무관한 임의 계산값입니다. 최근 30일 이내 당월 포스팅 업로드 빈도(Volume), 발행 주기 성실도(Frequency), 제목 및 콘텐츠 본문 텍스트 밀도 가중치를 실시간 다차원 연산하여 도출한 대략적인 활성 점수이오니 블로그 운영 참고용으로만 활용해 주시기 바랍니다. (※ 프록시 서버 및 포털 RSS 네트워크 상태에 따라 간혹 데이터 로딩이 누락되어 일시적인 판정 오차가 발생할 수 있습니다.)";
 
-                // 🌟 분기된 텍스트 데이터를 화면 컴포넌트에 안전하게 주입
                 document.getElementById('tendencyValue').innerText = finalTendencyTitle;
                 document.getElementById('descNoticeBox').innerHTML = finalTendencyDesc;
 
