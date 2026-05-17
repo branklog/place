@@ -159,17 +159,13 @@
     </div>
 
     <script>
-        function startAnalysis(type) {
-            if (type === 'blog') {
-                const id = document.getElementById('blogId').value.trim();
-                if (!id) return alert('네이버 블로그 아이디를 입력해주세요.');
-                location.href = `result.html?blogId=${encodeURIComponent(id)}`;
-            } else {
-                const keyword = document.getElementById('keywordId').value.trim();
-                if (!keyword) return alert('분석할 키워드를 입력해주세요.');
-                location.href = `result.html?keywordOnly=${encodeURIComponent(keyword)}`;
-            }
-        }
+function startAnalysis(type) {
+    if (type === 'blog') {
+        const id = document.getElementById('blogId').value.trim();
+        if (!id) return alert('네이버 블로그 아이디를 입력해주세요.');
+        location.href = `result.html?blogId=${encodeURIComponent(id)}`;
+    }
+}
     </script>
 </body>
 </html>
