@@ -184,7 +184,7 @@
                     <div class="tendency-icon" id="tendencyIcon">🏆</div>
                     <div class="tendency-details">
                         <div class="tendency-label" id="tendencyLabel">실시간 채널 성향 판정</div>
-                        <div class="tendency-value" id="tendencyValue">전문형 블로그 분석 중...</div>
+                        <div class="tendency-value" id="tendencyValue">블로그 분석 중...</div>
                     </div>
                 </div>
 
@@ -392,38 +392,25 @@
                     }
                 });
 
-                // 🌟 [정합성 고도화] 점수가 낮아도 전문 정체성이 담겨있다면 전문 브랜드를 온전히 판정합니다.
+                // score 기준 차단 및 네이밍 담백하게 분기
                 let finalTendencyTitle = "";
                 let finalTendencyDesc = "";
 
-                if (score >= 80) {
-                    finalTendencyTitle = `${matchedCategory} 최적화 전문 블로그`;
-                    finalTendencyDesc = matchedCategory === "일반/일상"
-                        ? "다양한 일상 트렌드와 방대한 정보를 골고루 다루며 대중적 소통과 노출 가중치가 최고 수준인 라이프스타일 랜드마크 채널입니다."
-                        : `최근 발행된 포스팅 스캔 결과, [${matchedCategory}] 카테고리의 핵심 타겟 키워드 밀도와 콘텐츠 전문성이 공식 최고 지수급에 근접하게 연산되었습니다.`;
-                } else if (score >= 55) {
-                    finalTendencyTitle = `${matchedCategory} 준최적화 전문 블로그`;
-                    finalTendencyDesc = matchedCategory === "일반/일상"
-                        ? "일상 일기 기록과 유용한 정보 전달의 밸런스가 뛰어나며, 탄탄한 이웃 소통을 전개하는 준최상위급 라이프 채널입니다."
-                        : `최근 포스팅 데이터를 다차원 정밀 연산한 결과, [${matchedCategory}] 카테고리의 테마 연관성이 높고 정보 검색 노출 가중치가 활성화된 준최 상위 전문 채널입니다.`;
-                } else if (score >= 35) {
-                    // 35 ~ 54점 성장기
-                    if (matchedCategory === "일반/일상") {
-                        finalTendencyTitle = "성장형 준최적화 블로그";
-                        finalTendencyDesc = "특정 카테고리에 치우치지 않고 일상, 트렌드, 리뷰 등 유연한 스펙트럼의 콘텐츠를 발행하며 완만하게 지수를 축적하고 있는 성장형 채널입니다.";
-                    } else {
-                        finalTendencyTitle = `${matchedCategory} 성장형 전문 블로그`;
-                        finalTendencyDesc = `최근 포스팅 내에 [${matchedCategory}] 관련 뚜렷한 전문 정체성이 관측되나, 발행 패턴 및 본문 가중치 최적화가 아직 성장 단계에 머물러 있는 과도기형 채널입니다.`;
-                    }
+                if (score < 55) {
+                    finalTendencyTitle = "라이프스타일 일반 일상 블로그";
+                    finalTendencyDesc = "발행 주기 성실도 및 마케팅 타겟 키워드 본문 밀도가 지수 기준치 미만으로 산출되어, 특정 전문 활동보다는 개인의 소소한 일상 기록과 일기 용도로 최적화된 채널입니다.";
+                    matchedCategory = "일반/일상"; 
                 } else {
-                    // 🌟 20점대 이하 하위 구간 처리 (점수와 무관하게 제목 정체성 추적 보완)
-                    if (matchedCategory === "일반/일상") {
-                        finalTendencyTitle = "라이프스타일 일반 일상 블로그";
-                        finalTendencyDesc = "발행 주기 성실도 및 마케팅 타겟 키워드 밀도가 다소 누락되어, 상업적 활용보다는 개인 소소한 일상 기록과 청정 소통 용도로 최적화된 소셜 채널입니다.";
+                    if (score >= 80) {
+                        finalTendencyTitle = matchedCategory === "일반/일상" ? "최적화 라이프 블로그" : `${matchedCategory} 최적화 블로그`;
+                        finalTendencyDesc = matchedCategory === "일반/일상"
+                            ? "다양한 일상 트렌드와 방대한 정보를 골고루 다루며 대중적 소통과 노출 가중치가 최고 수준인 라이프스타일 중심 채널입니다."
+                            : `최근 발행된 포스팅 스캔 결과, [${matchedCategory}] 카테고리의 핵심 타겟 키워드 밀도와 콘텐츠 완성도가 최고 지수급에 근접하게 연산되었습니다.`;
                     } else {
-                        // 점수가 낮아도 특정 전문 주제가 검출된 핵심 반전 분기 구역
-                        finalTendencyTitle = `${matchedCategory} 휴면/초기형 전문 블로그`;
-                        finalTendencyDesc = `포스팅 분석 결과 [${matchedCategory}] 영역에 대한 명확한 전문 정체성을 포함하고 있습니다. 다만, 최근 발행 공백기(휴면) 또는 누적 볼륨 부족으로 인해 일시적으로 종합 지수 가중치가 하락해 있는 상태입니다.`;
+                        finalTendencyTitle = matchedCategory === "일반/일상" ? "준최적화 라이프 블로그" : `${matchedCategory} 준최적화 블로그`;
+                        finalTendencyDesc = matchedCategory === "일반/일상"
+                            ? "일상 일기 기록과 유용한 정보 전달의 밸런스가 뛰어나며, 탄탄한 이웃 소통을 전개하는 상위급 라이프 채널입니다."
+                            : `최근 포스팅 데이터를 다차원 정밀 연산한 결과, [${matchedCategory}] 카테고리의 테마 연관성이 높고 정보 검색 노출 가중치가 활성화된 준최 상위 채널입니다.`;
                     }
                 }
 
