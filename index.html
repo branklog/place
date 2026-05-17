@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>블로그 지수 분석 B랭크로그 | BrankLog</title>
+     <link rel="apple-touch-icon" href="logo.svg">
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -15,119 +16,156 @@
             align-items: center;
             min-height: 100vh;
         }
-        .search-container {
+        .main-container {
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        
+        /* 🌟 [디자인 교정] 왼쪽 블라이처럼 로고와 텍스트를 위아래 2단 배치로 크게 확장 */
+        .brand-logo-area {
+            display: flex;
+            flex-direction: column; /* 세로 배열로 변경하여 크기 극대화 */
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+        /* 로고 마크 크기를 시원시원하게 스케일업 */
+        .brand-logo-area img {
+            height: 56px; /* 기존 32px에서 대폭 확장 */
+            width: auto;
+            display: block;
+        }
+        /* 타이틀 서체 크기를 굵고 웅장하게 키우기 */
+        .brand-text {
+            font-size: 38px; /* 기존 26px에서 대폭 확장 */
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: #ffffff;
+            text-transform: uppercase;
+        }
+        .main-sub {
+            font-size: 15px;
+            color: #8b949e;
+            margin-bottom: 40px;
+        }
+        
+        /* 검색 섹션 레이아웃 */
+        .search-section {
             background-color: #161b22;
             border: 1px solid #30363d;
-            border-radius: 14px;
-            padding: 40px;
-            width: 100%;
-            max-width: 480px;
-            text-align: center;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+            border-radius: 16px;
+            padding: 30px 24px;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.4);
+            margin-bottom: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
         }
-        h1 { font-size: 26px; margin-bottom: 10px; font-weight: 800; letter-spacing: -0.5px; }
-        h1 span { color: #03cf5d; }
-        .subtitle { font-size: 14px; color: #8b949e; margin-bottom: 30px; }
+        .input-group {
+            text-align: left;
+        }
+        .input-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #8b949e; 
+            margin-bottom: 12px;
+            display: block;
+        }
         
-        /* 탭 메뉴 스타일 */
-        .tab-menu { display: flex; background: #0d1117; padding: 4px; border-radius: 8px; margin-bottom: 25px; border: 1px solid #21262d; }
-        .tab-btn { flex: 1; padding: 10px; background: none; border: none; color: #8b949e; font-size: 14px; font-weight: 600; cursor: pointer; border-radius: 6px; transition: all 0.2s; }
-        .tab-btn.active.blog { background: #03cf5d; color: #ffffff; }
-        .tab-btn.active.place { background: #388bfd; color: #ffffff; }
-
-        .input-group { display: flex; flex-direction: column; gap: 15px; }
-        input {
-            background-color: #0d1117;
-            border: 1px solid #30363d;
-            border-radius: 8px;
-            padding: 15px;
-            color: #ffffff;
-            font-size: 16px;
-            outline: none;
-            box-sizing: border-box;
-            width: 100%;
+        /* 🌟 [디자인 교정] 인풋 입력창 구역을 흰색(White) 배경으로 완전 반전 */
+        .search-box {
+            display: flex;
+            background: #ffffff; /* 완전히 투명하고 정갈한 흰색 바탕 */
+            border: 1px solid #ffffff;
+            border-radius: 10px;
+            padding: 6px;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
-        input:focus { border-color: #03cf5d; }
-        input.place-focus:focus { border-color: #388bfd; }
-
-        button.search-submit {
+        /* 흰색 배경에 맞춰 입력 텍스트와 플레이스홀더 컬러 최적화 */
+        .search-box input {
+            flex-grow: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #0d1117; /* 글자색을 어두운 톤으로 변경하여 가독성 확보 */
+            padding: 10px 12px;
+            font-size: 15px;
+            width: 100%;
+            font-weight: 500;
+        }
+        .search-box input::placeholder {
+            color: #8b949e; /* 흰색 바탕에서 잘 보이는 차분한 회색 플레이스홀더 */
+        }
+        
+        /* 버튼 스타일 지정 */
+        .btn-common {
             color: #ffffff;
             border: none;
+            padding: 11px 20px;
             border-radius: 8px;
-            padding: 15px;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 700;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: opacity 0.2s;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
-        button.search-submit.blog { background-color: #03cf5d; }
-        button.search-submit.blog:hover { background-color: #02a94c; }
-        button.search-submit.place { background-color: #388bfd; }
-        button.search-submit.place:hover { background-color: #1f6feb; }
+        .btn-naver { background: #03cf5d; }
+        .btn-keyword { background: #388bfd; }
+        .btn-common:hover { opacity: 0.9; }
+        
+        .divider {
+            height: 1px;
+            background: #30363d;
+            border: none;
+            margin: 5px 0;
+        }
+        .footer-notice {
+            font-size: 11px;
+            color: #6e7681;
+            line-height: 1.6;
+            word-break: keep-all;
+        }
     </style>
 </head>
 <body>
 
-    <div class="search-container">
-        <h1>Brank<span id="brandDot">Log.</span></h1>
-        <p class="subtitle">네이버 빅데이터 통합 지수 조회 시스템</p>
-        
-        <div class="tab-menu">
-            <button class="tab-btn active blog" onclick="switchTab('blog')">네이버 블로그</button>
-            <button class="tab-btn place" onclick="switchTab('place')">스마트플레이스</button>
+    <div class="main-container">
+        <div class="brand-logo-area">
+            <img src="logo.svg" alt="BrankLog Logo">
+            <span class="brand-text">Brank<span style="color: #03cf5d;">Log.</span></span>
         </div>
+        <p class="main-sub">네이버 블로그 실시간 빅데이터 지수 분석 플랫폼</p>
 
-        <div class="input-group">
-            <input type="text" id="mainInput" placeholder="네이버 블로그 ID를 입력하세요" onkeypress="if(event.keyCode==13) handleSearch()">
-            <button id="submitBtn" class="search-submit blog" onclick="handleSearch()">블로그 지수 분석하기</button>
-        </div>
+        <div class="search-section">
+            <div class="input-group">
+                <span class="input-label">블로그 지수 분석 (Naver)</span>
+                <div class="search-box">
+                    <input type="text" id="blogId" placeholder="네이버 블로그 ID를 입력해주세요" onkeypress="if(event.keyCode==13) startAnalysis('blog')">
+                    <button class="btn-common btn-naver" onclick="startAnalysis('blog')">분석하기</button>
+                </div>
+            </div>
+
+      
+        <p class="footer-notice">
+            아이디 입력 시 해당 블로그의 최근 30일 활성 데이터 스코어 및<br>
+            종합 노출 가중치 리포트를 실시간으로 파싱하여 제공합니다.
+        </p>
     </div>
 
     <script>
-        let currentMode = 'blog';
-
-        function switchTab(mode) {
-            currentMode = mode;
-            const input = document.getElementById('mainInput');
-            const btn = document.getElementById('submitBtn');
-            const dot = document.getElementById('brandDot');
-            const blogBtn = document.querySelector('.tab-btn.blog');
-            const placeBtn = document.querySelector('.tab-btn.place');
-
-            if (mode === 'blog') {
-                blogBtn.classList.add('active');
-                placeBtn.classList.remove('active');
-                input.placeholder = "네이버 블로그 ID를 입력하세요";
-                input.classList.remove('place-focus');
-                btn.innerText = "블로그 지수 분석하기";
-                btn.className = "search-submit blog";
-                dot.style.color = "#03cf5d";
+        function startAnalysis(type) {
+            if (type === 'blog') {
+                const id = document.getElementById('blogId').value.trim();
+                if (!id) return alert('네이버 블로그 아이디를 입력해주세요.');
+                location.href = `result.html?blogId=${encodeURIComponent(id)}`;
             } else {
-                placeBtn.classList.add('active');
-                blogBtn.classList.remove('active');
-                input.placeholder = "네이버 플레이스 상호명을 입력하세요";
-                input.classList.add('place-focus');
-                btn.innerText = "플레이스 마케팅 지수 조회";
-                btn.className = "search-submit place";
-                dot.style.color = "#388bfd";
-            }
-            input.value = "";
-            input.focus();
-        }
-
-        function handleSearch() {
-            const inputValue = document.getElementById('mainInput').value.trim();
-            if (!inputValue) {
-                alert(currentMode === 'blog' ? '블로그 ID를 입력해 주세요.' : '상호명을 입력해 주세요.');
-                return;
-            }
-
-            if (currentMode === 'blog') {
-                // 기존 블로그 주소 형식 연동
-                window.location.href = `result.html?blogId=${encodeURIComponent(inputValue)}`;
-            } else {
-                // 신설 플레이스 주소 형식 연동
-                window.location.href = `result.html?placeQuery=${encodeURIComponent(inputValue)}`;
+                
             }
         }
     </script>
