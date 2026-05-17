@@ -139,16 +139,32 @@
                 </div>
             </div>
 
-            <div class="card">
+          <div class="card">
                 <p class="card-title" id="listTitle">🔥 채널 성향 결과 리포트</p>
-                <ul id="postContainer" class="post-list"></ul>
-            </div>
-        </div>
+                
+                <div class="tendency-box">
+                    <div class="tendency-icon" id="tendencyIcon">🏆</div>
+                    <div class="tendency-details">
+                        <div class="tendency-label" id="tendencyLabel">실시간 채널 성향 판정</div>
+                        <div class="tendency-value" id="tendencyValue">전문형 블로그 분석 중...</div>
+                    </div>
+                </div>
 
-        <div class="actions-zone">
-            <a href="index.html" id="backBtn" class="back-btn">← 다른 아이디 조회하기</a>
-        </div>
-    </div>
+                <div class="desc-notice-box" id="descNoticeBox">
+                    최근 포스팅 데이터를 정밀 스캔하여 스토어 및 마케팅 타겟 키워드 밀도와 콘텐츠 전문성을 연산하고 있습니다.
+                </div>
+
+                <div class="badge-zone-wrapper">
+                    <span class="badge-title">분석 핵심 타겟 영역</span>
+                    <span class="badge-item">
+                        <span class="badge-dot" id="badgeDot1" style="background: #ff4a5d;"></span>
+                        <span id="badgeText1">실시간 데이터 연동</span>
+                    </span>
+                    <span class="badge-item">
+                        <span class="badge-dot" id="badgeDot2" style="background: #388bfd;"></span>
+                        <span id="badgeText2">가중치 매칭 완료</span>
+                    </span>
+                </div>
 
     <script>
         const now = new Date();
