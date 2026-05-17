@@ -117,4 +117,19 @@
 
         function handleSearch() {
             const inputValue = document.getElementById('mainInput').value.trim();
-            if (!inputValue)
+            if (!inputValue) {
+                alert(currentMode === 'blog' ? '블로그 ID를 입력해 주세요.' : '상호명을 입력해 주세요.');
+                return;
+            }
+
+            if (currentMode === 'blog') {
+                // 기존 블로그 주소 형식 연동
+                window.location.href = `result.html?blogId=${encodeURIComponent(inputValue)}`;
+            } else {
+                // 신설 플레이스 주소 형식 연동
+                window.location.href = `result.html?placeQuery=${encodeURIComponent(inputValue)}`;
+            }
+        }
+    </script>
+</body>
+</html>
